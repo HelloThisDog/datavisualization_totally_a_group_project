@@ -34,6 +34,20 @@ def thousands_formatter(ax, axis="x"):
 
     return ax
 
+def millions_formatter(ax, axis="x"):
+    formatter = FuncFormatter(
+        lambda val, pos: f"{int(val/1000000)}M" if val else f"{val:.0f}"
+    )
+    if axis == "x":
+        ax.xaxis.set_major_formatter(formatter)
+    elif axis == "y":
+        ax.yaxis.set_major_formatter(formatter)
+    elif axis == "both":
+        ax.xaxis.set_major_formatter(formatter)
+        ax.yaxis.set_major_formatter(formatter)
+    
+    return ax
+
 def billions_formatter(ax, axis="x"):
     formatter = FuncFormatter(
         lambda val, pos: f"{int(val/100000000)}B" if val else f"{val:.0f}"
